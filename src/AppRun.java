@@ -7,6 +7,7 @@ public class AppRun {
         AddressBookImpl obj=new AddressBook();
         obj.operation(obj.list());
         obj.print();
+        obj.edit();
 
 
 

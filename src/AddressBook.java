@@ -12,14 +12,18 @@ public class AddressBook implements AddressBookImpl{
             do {
                 System.out.println("Choose Operation you want to do");
                 System.out
-                        .println("1. Add\t2. Print\t3.BAck");
+                        .println("1. Add\t2. Print\t3.Edit\t4.Back");
                 switch (s.nextInt()) {
                     case 1:
                         add();
                         break;
                     case 2:
                         print();
+                        break;
                     case 3:
+                        edit();
+                        break;
+                    case 4:
                         status = false;
                         break;
                 }
@@ -67,6 +71,49 @@ public class AddressBook implements AddressBookImpl{
     @Override
     public ArrayList<Contact> list() {
         return list;
+    }
+
+    @Override
+    public void edit() {
+        System.out.println("Enter your First name:");
+        String fname = s.next();
+
+        Iterator<Contact> iterator = list.listIterator();
+
+        while (iterator.hasNext()) {
+            Contact contact = iterator.next();
+
+            if (fname.equals(contact.getFirstName()))
+            {
+                //Address address = person.getAddress();
+                System.out.println("Choose field you want to add:");
+                System.out
+                        .println("1.Last Name\t2.Phone Number\t3.City\t4.Zip\t5. State");
+                switch (s.nextInt()) {
+                    case 1:
+                        System.out.println("Re-Correct your lastname");
+                        contact.setLastName(s.next());
+                        break;
+                    case 2:
+                        System.out.println("Re-Correct your Phone Number");
+                        contact.setPhoneNumber(s.next());
+                        break;
+                    case 3:
+                        System.out.println("Re-Correct your City");
+                        contact.setCity(s.next());
+                        break;
+                    case 4:
+                        System.out.println("Re-Correct your Email");
+                        contact.setEmail(s.next());
+                        break;
+                    case 5:
+                        System.out.println("Re-Correct your State");
+                        contact.setState(s.next());
+                        break;
+                }
+
+            }
+        }
     }
 
 
