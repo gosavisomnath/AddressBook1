@@ -74,7 +74,7 @@ public class Contact {
                 '}';
     }
 
-    public Contact(int id,String firstName, String lastName, String address, String city, String state, String email, String phoneNumber) {
+    public Contact() {
 
         this.firstName = firstName;
         this.lastName = lastName;
