@@ -8,6 +8,7 @@ public class AppRun {
         obj.operation(obj.list());
         obj.print();
         obj.edit();
+        obj.delete();
 
 
 

@@ -6,6 +6,7 @@ public interface AddressBookImpl {
     public void print();
     public ArrayList<Contact> list();
     public void edit();
+    public void delete();
 
 
 

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class AddressBook implements AddressBookImpl{
+public class AddressBook implements AddressBookImpl {
         Scanner s = new Scanner(System.in);
         ArrayList<Contact> list = new ArrayList<Contact>();
         public void operation(ArrayList<Contact> arrayRead)
@@ -12,7 +12,7 @@ public class AddressBook implements AddressBookImpl{
             do {
                 System.out.println("Choose Operation you want to do");
                 System.out
-                        .println("1. Add\t2. Print\t3.Edit\t4.Back");
+                        .println("1. Add\t2. Print\t3.Edit\t4.Delete \t5.Back");
                 switch (s.nextInt()) {
                     case 1:
                         add();
@@ -24,6 +24,9 @@ public class AddressBook implements AddressBookImpl{
                         edit();
                         break;
                     case 4:
+                        delete();
+                        break;
+                    case 5:
                         status = false;
                         break;
                 }
@@ -112,6 +115,23 @@ public class AddressBook implements AddressBookImpl{
                         break;
                 }
 
+            }
+        }
+    }
+
+    @Override
+    public void delete() {
+        System.out.println("Enter your First name:");
+        String fname = s.next();
+
+        Iterator<Contact> iterator = list.listIterator();
+        while (iterator.hasNext())
+        {
+            Contact contact = iterator.next();
+
+            if (fname.equals(contact.getFirstName()))
+            {
+                list.remove(contact);
             }
         }
     }
