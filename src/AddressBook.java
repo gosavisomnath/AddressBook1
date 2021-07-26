@@ -3,35 +3,35 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class AddressBook implements AddressBookImpl {
-        Scanner s = new Scanner(System.in);
-        ArrayList<Contact> list = new ArrayList<Contact>();
-        public void operation(ArrayList<Contact> arrayRead)
-        {
-            list = arrayRead;
-            boolean status = true;
-            do {
-                System.out.println("Choose Operation you want to do");
-                System.out
-                        .println("1. Add\t2. Print\t3.Edit\t4.Delete \t5.Back");
-                switch (s.nextInt()) {
-                    case 1:
-                        add();
-                        break;
-                    case 2:
-                        print();
-                        break;
-                    case 3:
-                        edit();
-                        break;
-                    case 4:
-                        delete();
-                        break;
-                    case 5:
-                        status = false;
-                        break;
-                }
-            } while (status);
-        }
+    Scanner s = new Scanner(System.in);
+    ArrayList<Contact> list = new ArrayList<Contact>();
+
+    public void operation(ArrayList<Contact> arrayRead) {
+        list = arrayRead;
+        boolean status = true;
+        do {
+            System.out.println("Choose Operation you want to do");
+            System.out
+                    .println("1. Add\t2. Print\t3.Edit\t4.Delete \t5.Back");
+            switch (s.nextInt()) {
+                case 1:
+                    add();
+                    break;
+                case 2:
+                    print();
+                    break;
+                case 3:
+                    edit();
+                    break;
+                case 4:
+                    delete();
+                    break;
+                case 5:
+                    status = false;
+                    break;
+            }
+        } while (status);
+    }
 
     @Override
     public void add() {
@@ -47,6 +47,10 @@ public class AddressBook implements AddressBookImpl {
         System.out.println("Enter the Phone Number:");
         String phone = s.next();
         contact.setPhoneNumber(phone);
+
+        System.out.println("Enter the Address:");
+        String address = s.next();
+        contact.setAddress(address);
 
         System.out.println("Enter the City:");
         String city = s.next();
@@ -65,11 +69,11 @@ public class AddressBook implements AddressBookImpl {
 
     @Override
     public void print() {
-            Iterator<Contact> it = list.iterator();
-            while (it.hasNext()) {
-                System.out.println(it.next());
-            }
+        Iterator<Contact> it = list.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
         }
+    }
 
     @Override
     public ArrayList<Contact> list() {
@@ -86,12 +90,10 @@ public class AddressBook implements AddressBookImpl {
         while (iterator.hasNext()) {
             Contact contact = iterator.next();
 
-            if (fname.equals(contact.getFirstName()))
-            {
-                //Address address = person.getAddress();
+            if (fname.equals(contact.getFirstName())) {
+
                 System.out.println("Choose field you want to add:");
-                System.out
-                        .println("1.Last Name\t2.Phone Number\t3.City\t4.Zip\t5. State");
+                System.out.println("1.Last Name\t2.Phone Number\t3.City\t4.Zip\t5. State\t6.address");
                 switch (s.nextInt()) {
                     case 1:
                         System.out.println("Re-Correct your lastname");
@@ -113,6 +115,10 @@ public class AddressBook implements AddressBookImpl {
                         System.out.println("Re-Correct your State");
                         contact.setState(s.next());
                         break;
+                    case 6:
+                        System.out.println("Re-Correct your Address");
+                        contact.setAddress(s.next());
+                        break;
                 }
 
             }
@@ -124,17 +130,17 @@ public class AddressBook implements AddressBookImpl {
         System.out.println("Enter your First name:");
         String fname = s.next();
 
-        Iterator<Contact> iterator = list.listIterator();
-        while (iterator.hasNext())
-        {
-            Contact contact = iterator.next();
-
-            if (fname.equals(contact.getFirstName()))
+        for (Iterator<Contact> it = list.iterator(); it.hasNext(); ) {
+            if (it.next().getFirstName().contains(fname))
             {
-                list.remove(contact);
+                it.remove();
+                System.out.println("List Deleted:");
+            }else
+            {
+                System.out.println("Enter Correct Name:");
             }
         }
+
+
     }
-
-
 }
