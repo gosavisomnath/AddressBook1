@@ -9,6 +9,8 @@ public class AppRun {
         obj.print();
         obj.edit();
         obj.delete();
+        obj.sortByName();
+
 
 
 

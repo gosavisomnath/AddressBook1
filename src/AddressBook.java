@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AddressBook implements AddressBookImpl {
     Scanner s = new Scanner(System.in);
@@ -11,8 +11,7 @@ public class AddressBook implements AddressBookImpl {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out
-                    .println("1. Add\t2. Print\t3.Edit\t4.Delete \t5.Back");
+            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.sortByName \t6.GetPersonByCity \t7.Back");
             switch (s.nextInt()) {
                 case 1:
                     add();
@@ -27,6 +26,12 @@ public class AddressBook implements AddressBookImpl {
                     delete();
                     break;
                 case 5:
+                    sortByName();
+                    break;
+                case 6:
+                    sortByCity();
+                    break;
+                case 7:
                     status = false;
                     break;
             }
@@ -37,16 +42,12 @@ public class AddressBook implements AddressBookImpl {
     public void add() {
         Contact contact = new Contact();
         System.out.println("Enter the First name:");
-        String fname = s.next();
-        contact.setFirstName(fname);
+        String firstName = s.next();
+        contact.setFirstName(firstName);
 
         System.out.println("Enter the Last name:");
-        String lname = s.next();
-        contact.setLastName(lname);
-
-        System.out.println("Enter the Phone Number:");
-        String phone = s.next();
-        contact.setPhoneNumber(phone);
+        String lastName = s.next();
+        contact.setLastName(lastName);
 
         System.out.println("Enter the Address:");
         String address = s.next();
@@ -56,14 +57,20 @@ public class AddressBook implements AddressBookImpl {
         String city = s.next();
         contact.setCity(city);
 
+        System.out.println("Enter the State:");
+        String state = s.next();
+        contact.setState(state);
+
         System.out.println("Enter the Email:");
         String email = s.next();
         contact.setEmail(email);
 
-        System.out.println("Enter the State:");
-        String state = s.next();
-        contact.setState(state);
+        System.out.println("Enter the Phone Number:");
+        String phoneNumber = s.next();
+        contact.setPhoneNumber(phoneNumber);
         list.add(contact);
+
+
 
     }
 
@@ -143,4 +150,17 @@ public class AddressBook implements AddressBookImpl {
 
 
     }
+
+    @Override
+    public void sortByName() {
+        Collections.sort(list, Sort.compareFirstName);
+
+    }
+
+    @Override
+    public void sortByCity() {
+        Collections.sort(list, Sort.getCity);
+
+    }
+
 }
