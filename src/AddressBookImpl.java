@@ -12,6 +12,8 @@ public interface AddressBookImpl {
     public void searchPersonByState();
     public void countByCity();
     public void sortPersonByFirstname();
+    public void sortPersonByCity();
+    public void sortPersonByState();
 
 
 }

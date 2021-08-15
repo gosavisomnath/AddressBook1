@@ -11,7 +11,7 @@ public class AddressBook implements AddressBookImpl {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.SearchPersonByCity \t6.SearchPersonByState \t7.CountByCity \t8.sortPersonByFirstname \t9.Back");
+            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.SearchPersonByCity \t6.SearchPersonByState \t7.CountByCity \t8.sortPersonByFirstname \t9.sortPersonByCity \t10.sortPersonByState \t11.Back");
             switch (s.nextInt()) {
                 case 1:
                     add();
@@ -38,6 +38,12 @@ public class AddressBook implements AddressBookImpl {
                     sortPersonByFirstname();
                     break;
                 case 9:
+                    sortPersonByCity();
+                    break;
+                case 10:
+                    sortPersonByState();
+                    break;
+                case 11:
                     status = false;
                     break;
             }
@@ -218,6 +224,26 @@ public class AddressBook implements AddressBookImpl {
         list.sort(Comparator.comparing(Contact::getFirstName));
         list.forEach((Contact C) -> System.out.println(C.getFirstName() + " " + C.getLastName()));
 
+    }
+    public void sortPersonByCity()
+    {
+        for (Contact C : list)
+        {
+            System.out.println(C.getCity());
+        }
+        System.out.println("---------After sorting the entry by City----------");
+        list.stream();
+        list.sort(Comparator.comparing(Contact::getCity));
+        list.forEach((Contact C) -> System.out.println(C.getFirstName() + " " + C.getLastName() + " " + C.getCity()));
+    }
+    public void sortPersonByState() {
+        for (Contact C : list) {
+            System.out.println(C.getState());
+        }
+        System.out.println("---------After sorting the entry by State----------");
+        list.stream();
+        list.sort(Comparator.comparing(Contact::getState));
+        list.forEach((Contact C) -> System.out.println(C.getFirstName() + " " + C.getLastName() + " " + C.getCity() + " " + C.getState()));
     }
 
 
