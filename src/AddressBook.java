@@ -11,7 +11,7 @@ public class AddressBook implements AddressBookImpl {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.sortByName \t6.GetPersonByCity \t7.Back");
+            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.Back");
             switch (s.nextInt()) {
                 case 1:
                     add();
@@ -26,12 +26,6 @@ public class AddressBook implements AddressBookImpl {
                     delete();
                     break;
                 case 5:
-                    sortByName();
-                    break;
-                case 6:
-                    sortByCity();
-                    break;
-                case 7:
                     status = false;
                     break;
             }
@@ -43,6 +37,7 @@ public class AddressBook implements AddressBookImpl {
         Contact contact = new Contact();
         System.out.println("Enter the First name:");
         String firstName = s.next();
+        duplicateName(firstName);
         contact.setFirstName(firstName);
 
         System.out.println("Enter the Last name:");
@@ -152,15 +147,22 @@ public class AddressBook implements AddressBookImpl {
     }
 
     @Override
-    public void sortByName() {
-        Collections.sort(list, Sort.compareFirstName);
+    public void duplicateName(String firstName) {
+        for (int i = 0; i < list.size(); i++)
+        {
+            String contactName = list.get(i).firstName;
 
+            if (firstName.equals(contactName))
+            {
+                System.out.println("This Person is Already Present");
+            }
+            else
+            {
+                System.out.println("You can Add this Person");
+                break;
+            }
+        }
     }
 
-    @Override
-    public void sortByCity() {
-        Collections.sort(list, Sort.getCity);
-
-    }
 
 }

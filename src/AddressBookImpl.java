@@ -7,9 +7,7 @@ public interface AddressBookImpl {
     public ArrayList<Contact> list();
     public void edit();
     public void delete();
-    public void sortByName();
-    public void sortByCity();
-
+    public void duplicateName(String firstName);
 
 
 }
