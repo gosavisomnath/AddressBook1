@@ -10,6 +10,7 @@ public interface AddressBookImpl {
     public void duplicateName(String firstName);
     public void searchPersonByCity();
     public void searchPersonByState();
+    public void countByCity();
 
 
 }
