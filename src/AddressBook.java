@@ -11,7 +11,7 @@ public class AddressBook implements AddressBookImpl {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.SearchPersonByCity \t6.SearchPersonByState \t7.CountByCity \t8.Back");
+            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.SearchPersonByCity \t6.SearchPersonByState \t7.CountByCity \t8.sortPersonByFirstname \t9.Back");
             switch (s.nextInt()) {
                 case 1:
                     add();
@@ -35,6 +35,9 @@ public class AddressBook implements AddressBookImpl {
                     countByCity();
                     break;
                 case 8:
+                    sortPersonByFirstname();
+                    break;
+                case 9:
                     status = false;
                     break;
             }
@@ -203,6 +206,18 @@ public class AddressBook implements AddressBookImpl {
     {
         System.out.println(list.stream().collect(Collectors.groupingBy((Contact C) -> C.getCity())));
         System.out.println((list.stream().collect(Collectors.groupingBy((Contact C) -> C.getCity(),Collectors.counting()))));
+    }
+    public void sortPersonByFirstname()
+    {
+        for (Contact C : list)
+        {
+            System.out.println(C.getFirstName());
+        }
+        System.out.println("-----------After sorting the entry by First name-----");
+        list.stream();
+        list.sort(Comparator.comparing(Contact::getFirstName));
+        list.forEach((Contact C) -> System.out.println(C.getFirstName() + " " + C.getLastName()));
+
     }
 
 
