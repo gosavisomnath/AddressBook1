@@ -9,6 +9,7 @@ public interface AddressBookImpl {
     public void delete();
     public void duplicateName(String firstName);
     public void searchPersonByCity();
+    public void searchPersonByState();
 
 
 }
