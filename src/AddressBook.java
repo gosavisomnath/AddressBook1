@@ -11,7 +11,7 @@ public class AddressBook implements AddressBookImpl {
         boolean status = true;
         do {
             System.out.println("Choose Operation you want to do");
-            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.Back");
+            System.out.println("1. Add \t2. Print \t3.Edit \t4.Delete \t5.SearchPersonByCity \t6.Back");
             switch (s.nextInt()) {
                 case 1:
                     add();
@@ -26,6 +26,9 @@ public class AddressBook implements AddressBookImpl {
                     delete();
                     break;
                 case 5:
+                    searchPersonByCity();
+                    break;
+                case 6:
                     status = false;
                     break;
             }
@@ -161,6 +164,19 @@ public class AddressBook implements AddressBookImpl {
                 System.out.println("You can Add this Person");
                 break;
             }
+        }
+    }
+
+    @Override
+    public void searchPersonByCity() {
+        System.out.println("Enter City name to search Person by city name");
+        String userCity = s.next();
+        Dictionary City = new Hashtable();
+        list.stream().filter(map -> map.getCity().contains(userCity)).forEach(list -> City.put(list.getFirstName(),userCity));
+        System.out.println("City Name: " + userCity);
+        for (Enumeration i = City.keys(); i.hasMoreElements();)
+        {
+            System.out.println("Name : " + i.nextElement());
         }
     }
 
