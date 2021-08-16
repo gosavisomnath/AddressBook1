@@ -1,10 +1,16 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AddressBook implements AddressBookImpl {
+    HashMap<String, LinkedList<Contact>> addressBooks = new HashMap<>();
     Scanner s = new Scanner(System.in);
     ArrayList<Contact> list = new ArrayList<Contact>();
+    public static final String FILE_PATH = "AddressBook";
 
     public void operation(ArrayList<Contact> arrayRead) {
         list = arrayRead;
@@ -244,6 +250,46 @@ public class AddressBook implements AddressBookImpl {
         list.stream();
         list.sort(Comparator.comparing(Contact::getState));
         list.forEach((Contact C) -> System.out.println(C.getFirstName() + " " + C.getLastName() + " " + C.getCity() + " " + C.getState()));
+    }
+    public void writingToFile() {
+        checkFile();
+
+        StringBuffer addressBookBuffer = new StringBuffer();
+        addressBooks.entrySet().stream()
+                .map(books -> books.getKey())
+                .map(bookNames -> {
+                    addressBookBuffer.append(bookNames + "\n");
+                    return addressBooks.get(bookNames);
+                })
+                .forEach(contactInBook -> addressBookBuffer.append(contactInBook + "\n"));
+
+        try {
+            Files.write(Paths.get(FILE_PATH), addressBookBuffer.toString().getBytes());
+            System.out.println("Written in the file \n\n");
+        } catch (IOException e) {
+            System.err.println("Problem encountered while writing into file");
+        }
+    }
+
+    /*public void readFile() {
+        try {
+            String contentOfFile = Files.readString.get(FILE_PATH);
+            System.out.println(contentOfFile);
+        } catch (IOException e) {
+            System.err.println("Faced some problem while reading the file ");
+        }
+    }*/
+
+    private void checkFile() {
+        File file = new File(FILE_PATH);
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                System.out.println("Created a file at " + FILE_PATH);
+            }
+        } catch (IOException e1) {
+            System.err.println("Problem encountered while creating a file");
+        }
     }
 
 
